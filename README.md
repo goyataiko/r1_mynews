@@ -3,6 +3,12 @@ mynews<br>
 - ログイン認証機能
 - 掲示板の作成、編集、削除機能
 
+ログイン情報
+- id test1@test.com
+- pw test1@test.com
+
+- 加入リンク
+- - /register
 
 mynewsの復習 1回目<br>
 - コマンドは教科書よりcopy pasteするのではなく、直接タイピングで進行
