@@ -12,6 +12,17 @@ class ProfileController extends Controller
     }
     
     public function create(Request $request){
+        
+        $this -> validate($request, profile::$rules);
+        
+        $profile_table = new profile;
+        $form = $request-> all();
+        
+        unset($form['_token']);
+        
+        $news->fill($form);
+        $profile_table->save();        
+        
         return redirect('admin/profile/create');
     }
     
