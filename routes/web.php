@@ -17,12 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-use app\http\controllers\admin\newscontroller;
-use app\http\controllers\admin\profilecontroller;
+use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\ProfileController;
 
 Route::controller(NewsController::class)->prefix('admin')->group(function(){
    route::get('news/create', 'add') ;
 });
+
 Route::controller(ProfileController::class)->prefix('admin')->group(function(){
    route::get('profile/create', 'add') ;
    route::get('profile/edit', 'edit') ;
