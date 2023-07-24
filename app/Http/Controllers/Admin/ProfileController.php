@@ -11,7 +11,7 @@ class ProfileController extends Controller
         return view('admin.profile.create');
     }
     
-    public function create(){
+    public function create(Request $request){
         return redirect('admin/profile/create');
     }
     
@@ -19,7 +19,7 @@ class ProfileController extends Controller
         return view('admin.profile.edit');
     }
     
-    public function update(){
+    public function update(Request $request){
         return redirect('admin/profile/edit');
     }
 }
