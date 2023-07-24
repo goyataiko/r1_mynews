@@ -21,12 +21,12 @@ use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\ProfileController;
 
 Route::controller(NewsController::class)->prefix('admin')->group(function(){
-   route::get('news/create', 'add') ;
+   route::get('news/create', 'add')->middleware('auth');
 });
 
 Route::controller(ProfileController::class)->prefix('admin')->group(function(){
-   route::get('profile/create', 'add') ;
-   route::get('profile/edit', 'edit') ;
+   route::get('profile/create', 'add')->middleware('auth');
+   route::get('profile/edit', 'edit')->middleware('auth');
 });
 Auth::routes();
 
