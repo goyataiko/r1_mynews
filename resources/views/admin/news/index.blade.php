@@ -31,15 +31,28 @@
                     <table class="table table-dark">
                         <thead>
                             <tr>
-                                <th width="20%">title</th>
-                                <th width="50%">text</th>
+                                <th width="5%">ID</th>
+                                <th width="20%">Title</th>
+                                <th width="20%">Text</th>
+                                <th width="30%">Image</th>
+                                <th width="10%">CRUD</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($posts as $news)
                                 <tr>
+                                    <td>{{ Str::limit($news->id, 10) }}</td>
                                     <td>{{ Str::limit($news->title, 100) }}</td>
                                     <td>{{ Str::limit($news->text, 250) }}</td>
+                                    <td>
+                                        <!--이미지 파일 어떻게 표시? 이미지는 링크만 저장되고 이미지 자체는 저장이 안되는건가?-->
+                                        <!--<img src="{{ asset('storage/image/' . $news->image_path) }}" alt="Image {{ $news->id }}">-->
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <a href="{{ route('admin.news.edit', ['id' => $news->id]) }}">Edit</a>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
