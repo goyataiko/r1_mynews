@@ -26,6 +26,9 @@ Route::controller(NewsController::class)->prefix('admin')->name('admin.')->middl
    
    route::get('news/create', 'add')->name('news.add');
    route::post('news/create', 'create')->name('news.create');
+   
+   route::get('news/edit', 'edit')->name('news.edit');
+   route::post('news/edit', 'update')->name('news.update');
 });
 
 
