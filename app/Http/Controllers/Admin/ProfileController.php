@@ -15,14 +15,14 @@ class ProfileController extends Controller
     
     public function create(Request $request){
         
-        $this -> validate($request, profile::$rules);
+        $this -> validate($request, Profile::$rules);
         
-        $profile_table = new profile;
+        $profile_table = new Profile;
         $form = $request-> all();
         
         unset($form['_token']);
         
-        $news->fill($form);
+        $profile_table->fill($form);
         $profile_table->save();        
         
         return redirect('admin/profile/create');

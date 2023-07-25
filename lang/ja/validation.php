@@ -99,7 +99,7 @@ return [
     'multiple_of' => 'The :attribute must be a multiple of :value.',
     'not_in' => 'The selected :attribute is invalid.',
     'not_regex' => 'The :attribute format is invalid.',
-    'numeric' => 'The :attribute must be a number.',
+    'numeric' => ' :attributeは必ず数字',
     'password' => [
         'letters' => 'The :attribute must contain at least one letter.',
         'mixed' => 'The :attribute must contain at least one uppercase and one lowercase letter.',
@@ -167,7 +167,11 @@ return [
 
     'attributes' => [
         'title' => 'タイトル',
-        'body' => '本文'
+        'body' => '本文',
+        'name' => '名前',
+        'gender' => '性別',
+        'hobby' => '趣味',
+        'introduction' => '自己紹介'
         ],
 
 ];
