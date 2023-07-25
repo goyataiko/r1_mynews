@@ -9,6 +9,17 @@ use App\Models\News;
 
 class NewsController extends Controller
 {
+    public function index(Request $request)
+    {
+        $searched = $request->search_value;
+        if ($searched != '') {
+            $posts = News::where('title', 'LIKE', '%' . $searched . '%')->get();
+        } else {
+            $posts = News::all();
+        }
+        return view('admin.news.index', ['posts' => $posts, 'search_value' => $searched]);
+    }
+    
     public function add(){
         return view('admin.news.create');
     }

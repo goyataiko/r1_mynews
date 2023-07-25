@@ -21,6 +21,9 @@ use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\ProfileController;
 
 Route::controller(NewsController::class)->prefix('admin')->name('admin.')->middleware('auth')->group(function(){
+   
+   route::get('news', 'index')-> name('news.index');
+   
    route::get('news/create', 'add')->name('news.add');
    route::post('news/create', 'create')->name('news.create');
 });
