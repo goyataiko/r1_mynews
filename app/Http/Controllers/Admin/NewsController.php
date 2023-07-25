@@ -13,7 +13,9 @@ class NewsController extends Controller
     {
         $searched = $request->search_value;
         if ($searched != '') {
-            $posts = News::where('title', 'LIKE', '%' . $searched . '%')->get();
+            $posts = News::where('title', 'LIKE', '%' . $searched . '%')
+             ->orWhere('text', 'LIKE', '%' . $searched . '%')
+             ->get();
         } else {
             $posts = News::all();
         }
