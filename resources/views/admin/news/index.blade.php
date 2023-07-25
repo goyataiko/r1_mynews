@@ -46,7 +46,8 @@
                                     <td>{{ Str::limit($news->text, 250) }}</td>
                                     <td>
                                         <!--이미지 파일 어떻게 표시? 이미지는 링크만 저장되고 이미지 자체는 저장이 안되는건가?-->
-                                        <!--<img src="{{ asset('storage/image/' . $news->image_path) }}" alt="Image {{ $news->id }}">-->
+                                        <!---->
+                                        <img src="{{ secure_asset('storage/image/' . $news->image_path) }}" alt="Image {{ $news->id }}">
                                     </td>
                                     <td>
                                         <div>

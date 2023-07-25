@@ -407,6 +407,7 @@ figure {
 img,
 svg {
   vertical-align: middle;
+  width: 50px;
 }
 
 table {

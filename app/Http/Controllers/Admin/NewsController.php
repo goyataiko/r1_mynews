@@ -45,7 +45,7 @@ class NewsController extends Controller
         // 이미지 수신시, 이미지를 저장하고, 이미지 패스 또한 따로 저장함 
         if(isset($form['image'])){
             $path = $request->file('image')->store('public/image');
-            $news_table -> image_path = basename('$path');
+            $news_table -> image_path = basename($path);
         } else {
             $news_table -> image_path = null;
         }
