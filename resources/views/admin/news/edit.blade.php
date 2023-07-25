@@ -1,10 +1,10 @@
 @extends('layouts.admin')
-@section('title', 'MyNewsEdit')
+@section('title', 'Edit My News')
 @section('content')
 <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
-                <h2>My News Edit</h2>
+                <h2>Edit My News</h2>
                 <form action="{{ route('admin.news.update') }}" method="post" enctype="multipart/form-data">
                     @if (count($errors) > 0)
                         <ul>

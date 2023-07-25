@@ -14,6 +14,8 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         $searched = $request->search_value;
+        // SQL 쿼리에서 LIKE 연산자를 사용, searched가 포함된 모든 값 검색하도록 함
+        // searched와 정확히 일치하는 값을 찾을 경우, where('title', $searched)
         if ($searched != '') {
             $posts = News::where('title', 'LIKE', '%' . $searched . '%')
              ->orWhere('text', 'LIKE', '%' . $searched . '%')
@@ -56,7 +58,7 @@ class NewsController extends Controller
         $news_table->fill($form);
         $news_table->save();
 
-        return redirect('admin/news/create');
+        return redirect('admin/news/');
     }
     
     
@@ -65,45 +67,55 @@ class NewsController extends Controller
     //==================
     public function edit(Request $request){
         
-        $news = News::find($request->id);
-        if(empty($news)){
+        $original_news_table = News::find($request->id);
+        if(empty($original_news_table)){
             abort(404);
         }
         
-        return view('admin.news.edit',['news_form'=> $news]);
+        return view('admin.news.edit',['news_form'=> $original_news_table]);
     }
     
     public function update(Request $request) {
         //유효성검사
         $this -> validate($request, News::$rules);
         
-        $news = News::find($request->id);
+        $original_news_table = News::find($request->id);
         //송신된 데이터 저장 
-        $news_form = $request-> all();
+        $new_news_form = $request-> all();
             //이미지 부분
                    //remove값이 있으면 이미지를 삭제 
             if ($request->remove == 'true'){
-                $news_form['image_path']=null;
+                $new_news_form['image_path']=null;
                     //새로 송신된 이미지 파일이 있나? 
             } elseif ($request -> file('image')) {
                 $path = $request->file('image')->store('public/image');
-                $news_form['image_path'] = basename($path);
+                $new_news_form['image_path'] = basename($path);
                 // remove도 없고, 새로 송신된 이미지도 아니라면, 
                 // 그대로 이전 image_path를 계속 써라 
             } else {
-                $news_form['image_path'] = $news->image_path;
+                $new_news_form['image_path'] = $original_news_table->image_path;
             }
         
-        unset($news_form['_token']);
-        unset($news_form['remove']);
-        unset($news_form['image']);
+        unset($new_news_form['_token']);
+        unset($new_news_form['remove']);
+        unset($new_news_form['image']);
         
         //덮어쓰기
-        $news->fill($news_form)-> save();
+        $original_news_table->fill($new_news_form)-> save();
         //아래 2줄의 축약형
-        // $news->fill($news_form);
-        // $news->save();
+        // $original_news_table->fill($new_news_form);
+        // $original_news_table->save();
 
         return redirect('admin/news');
     }
+    
+    //==================  Delete 기능 ==================
+    //==================
+    public function delete(Request $request){
+        
+        $original_news_table = News::find($request->id);
+        $original_news_table-> delete();
+        
+        return redirect('admin/news/');
+    }    
 }

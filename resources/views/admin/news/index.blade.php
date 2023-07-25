@@ -52,6 +52,9 @@
                                         <div>
                                             <a href="{{ route('admin.news.edit', ['id' => $news->id]) }}">Edit</a>
                                         </div>
+                                        <div>
+                                            <a href="{{ route('admin.news.delete', ['id' => $news->id]) }}">Delete</a>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

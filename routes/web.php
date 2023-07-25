@@ -29,6 +29,9 @@ Route::controller(NewsController::class)->prefix('admin')->name('admin.')->middl
    
    route::get('news/edit', 'edit')->name('news.edit');
    route::post('news/edit', 'update')->name('news.update');
+   
+      route::get('news/delete', 'delete')->name('news.delete');
+
 });
 
 
