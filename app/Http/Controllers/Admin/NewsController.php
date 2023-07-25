@@ -58,7 +58,7 @@ class NewsController extends Controller
         $news_table->fill($form);
         $news_table->save();
 
-        return redirect('admin/news/create');
+        return redirect('admin/news/');
     }
     
     
@@ -108,4 +108,14 @@ class NewsController extends Controller
 
         return redirect('admin/news');
     }
+    
+    //==================  Delete 기능 ==================
+    //==================
+    public function delete(Request $request){
+        
+        $original_news_table = News::find($request->id);
+        $original_news_table-> delete();
+        
+        return redirect('admin/news/');
+    }    
 }
