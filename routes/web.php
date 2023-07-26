@@ -36,12 +36,17 @@ Route::controller(NewsController::class)->prefix('admin')->name('admin.')->middl
 
 
 Route::controller(ProfileController::class)->prefix('admin')->name('admin.')->middleware('auth')->group(function(){
-   route::get('profile/create', 'add')->name('profile.create');
+   route::get('profile', 'index')->name('profile.index');
+   
+   route::get('profile/create', 'add')->name('profile.add');
    route::post('profile/create', 'create')->name('profile.create');
 
    route::get('profile/edit', 'edit')->name('profile.edit');
-   route::post('profile/edit', 'update')->name('profile.edit');
+   route::post('profile/edit', 'update')->name('profile.update');
+   
+   route::get('profile/delete', 'delete')->name('profile.delete');
 });
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
