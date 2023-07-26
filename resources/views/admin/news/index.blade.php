@@ -39,7 +39,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($news as $one_post)
+                            @foreach($every_news as $one_post)
                                 <tr>
                                     <td>{{ Str::limit($one_post->id, 10) }}</td>
                                     <td>{{ Str::limit($one_post->title, 100) }}</td>

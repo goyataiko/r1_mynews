@@ -14,14 +14,14 @@ class ProfileController extends Controller
     public function index(Request $request){
         $searched = $request->search_value;
         if($searched !== ''){
-            $posts = Profile::where('name','Like','%'.$searched.'%')
+            $full_list_data = Profile::where('name','Like','%'.$searched.'%')
              ->orWhere('age', 'LIKE', '%' . $searched . '%')
              ->orWhere('introduction', 'LIKE', '%' . $searched . '%')
              ->get();
         } else{
-            $posts = Profile::all();
+            $full_list_data = Profile::all();
         }
-        return view('admin.profile.index',['posts'=>$posts, 'search_value' => $searched]);
+        return view('admin.profile.index',['every_profile'=>$full_list_data, 'search_value' => $searched]);
     }
     
     //==========create
@@ -35,11 +35,11 @@ class ProfileController extends Controller
         $this -> validate($request, Profile::$rules);
         
         $profile_table = new Profile;
-        $form = $request-> all();
+        $inserted_data = $request-> all();
         
-        unset($form['_token']);
+        unset($inserted_data['_token']);
         
-        $profile_table->fill($form);
+        $profile_table->fill($inserted_data);
         $profile_table->save();        
         
         return redirect('admin/profile/');
@@ -61,11 +61,11 @@ class ProfileController extends Controller
         
         $this -> validate($request, Profile::$rules);
         $original_profile_table = Profile::find($request->id);
-        $new_profile_table = $request -> all();
+        $inserted_data = $request -> all();
         
-        unset($new_profile_table['_token']);
+        unset($inserted_data['_token']);
         
-        $original_profile_table -> fill($new_profile_table) -> save();
+        $original_profile_table -> fill($inserted_data) -> save();
         
         return redirect('admin/profile/');
     }
