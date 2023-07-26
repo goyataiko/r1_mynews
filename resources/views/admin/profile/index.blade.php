@@ -39,18 +39,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($posts as $profile)
+                            @foreach($every_profile as $each_profile)
                                 <tr>
-                                    <td>{{ Str::limit($profile->id, 10) }}</td>
-                                    <td>{{ Str::limit($profile->name, 20) }}</td>
-                                    <td>{{ Str::limit($profile->age, 3) }}</td>
-                                    <td>{{ Str::limit($profile->introduction, 100) }}</td>
+                                    <td>{{ Str::limit($each_profile->id, 10) }}</td>
+                                    <td>{{ Str::limit($each_profile->name, 20) }}</td>
+                                    <td>{{ Str::limit($each_profile->age, 3) }}</td>
+                                    <td>{{ Str::limit($each_profile->introduction, 100) }}</td>
                                     <td>
                                         <div>
-                                            <a href="{{ route('admin.profile.edit', ['id' => $profile->id]) }}">Edit</a>
+                                            <a href="{{ route('admin.profile.edit', ['id' => $each_profile->id]) }}">Edit</a>
                                         </div>
                                         <div>
-                                            <a href="{{ route('admin.profile.delete', ['id' => $profile->id]) }}">Delete</a>
+                                            <a href="{{ route('admin.profile.delete', ['id' => $each_profile->id]) }}">Delete</a>
                                         </div>
                                     </td>
                                 </tr>
