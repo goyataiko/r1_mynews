@@ -16,6 +16,8 @@ mynewsの復習 1回目
 
 - ageをstringではなく、numericに変更、validationルールの修正適用
 
+- indexより画像表示
+
 
 ログイン情報
 - id test1@test.com

@@ -23,7 +23,9 @@ class NewsController extends Controller
         } else {
             $posts = News::all();
         }
-        return view('admin.news.index', ['posts' => $posts, 'search_value' => $searched]);
+        
+        //posts, search_value는 해당 blade파일에서 받아오는 인수명 
+        return view('admin.news.index', ['news' => $posts, 'search_value' => $searched]);
     }
     
     
@@ -71,7 +73,7 @@ class NewsController extends Controller
         if(empty($original_news_table)){
             abort(404);
         }
-        
+        //news_form은 해당 blade파일에서 받아오는 인수명 
         return view('admin.news.edit',['news_form'=> $original_news_table]);
     }
     
