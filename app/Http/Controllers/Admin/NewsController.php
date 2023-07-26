@@ -16,16 +16,16 @@ class NewsController extends Controller
         $searched = $request->search_value;
         // SQL 쿼리에서 LIKE 연산자를 사용, searched가 포함된 모든 값 검색하도록 함
         // searched와 정확히 일치하는 값을 찾을 경우, where('title', $searched)
-        if ($searched != '') {
-            $posts = News::where('title', 'LIKE', '%' . $searched . '%')
+        if (empty($searched)) {
+            $full_list_data = News::all();
+        } else {
+            $full_list_data = News::where('title', 'LIKE', '%' . $searched . '%')
              ->orWhere('text', 'LIKE', '%' . $searched . '%')
              ->get();
-        } else {
-            $posts = News::all();
         }
         
-        //posts, search_value는 해당 blade파일에서 받아오는 인수명 
-        return view('admin.news.index', ['news' => $posts, 'search_value' => $searched]);
+        //['인덱스.blade파일' => $controller인수] 연동
+        return view('admin.news.index', ['every_news' => $full_list_data, 'search_value' => $searched]);
     }
     
     
@@ -42,10 +42,10 @@ class NewsController extends Controller
         $this -> validate($request, News::$rules);
 
         $news_table = new News;
-        $form = $request->all();
+        $inserted_data = $request->all();
 
         // 이미지 수신시, 이미지를 저장하고, 이미지 패스 또한 따로 저장함 
-        if(isset($form['image'])){
+        if(isset($inserted_data['image'])){
             $path = $request->file('image')->store('public/image');
             $news_table -> image_path = basename($path);
         } else {
@@ -53,11 +53,11 @@ class NewsController extends Controller
         }
 
         //쓰고 남은 정보 삭제
-        unset($form['_token']);
-        unset($form['image']);
+        unset($inserted_data['_token']);
+        unset($inserted_data['image']);
 
         //데이터베이스 보존
-        $news_table->fill($form);
+        $news_table->fill($inserted_data);
         $news_table->save();
 
         return redirect('admin/news/');
@@ -83,29 +83,29 @@ class NewsController extends Controller
         
         $original_news_table = News::find($request->id);
         //송신된 데이터 저장 
-        $new_news_form = $request-> all();
+        $inserted_data = $request-> all();
             //이미지 부분
                    //remove값이 있으면 이미지를 삭제 
             if ($request->remove == 'true'){
-                $new_news_form['image_path']=null;
+                $inserted_data['image_path']=null;
                     //새로 송신된 이미지 파일이 있나? 
             } elseif ($request -> file('image')) {
                 $path = $request->file('image')->store('public/image');
-                $new_news_form['image_path'] = basename($path);
+                $inserted_data['image_path'] = basename($path);
                 // remove도 없고, 새로 송신된 이미지도 아니라면, 
                 // 그대로 이전 image_path를 계속 써라 
             } else {
-                $new_news_form['image_path'] = $original_news_table->image_path;
+                $inserted_data['image_path'] = $original_news_table->image_path;
             }
         
-        unset($new_news_form['_token']);
-        unset($new_news_form['remove']);
-        unset($new_news_form['image']);
+        unset($inserted_data['_token']);
+        unset($inserted_data['remove']);
+        unset($inserted_data['image']);
         
         //덮어쓰기
-        $original_news_table->fill($new_news_form)-> save();
+        $original_news_table->fill($inserted_data)-> save();
         //아래 2줄의 축약형
-        // $original_news_table->fill($new_news_form);
+        // $original_news_table->fill($inserted_data);
         // $original_news_table->save();
 
         return redirect('admin/news');
