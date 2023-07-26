@@ -13,7 +13,7 @@
             <div class="col-md-8">
                 <form action="{{ route('admin.news.index') }}" method="get">
                     <div class="form-group row">
-                        <label class="col-md-2">タイトル</label>
+                        <label class="col-md-2">検索</label>
                         <div class="col-md-8">
                             <input type="text" class="form-control" name="search_value" value="{{ $search_value }}">
                         </div>
@@ -39,22 +39,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($posts as $news)
+                            @foreach($news as $one_post)
                                 <tr>
-                                    <td>{{ Str::limit($news->id, 10) }}</td>
-                                    <td>{{ Str::limit($news->title, 100) }}</td>
-                                    <td>{{ Str::limit($news->text, 250) }}</td>
+                                    <td>{{ Str::limit($one_post->id, 10) }}</td>
+                                    <td>{{ Str::limit($one_post->title, 100) }}</td>
+                                    <td>{{ Str::limit($one_post->text, 250) }}</td>
                                     <td>
-                                        <!--이미지 파일 어떻게 표시? 이미지는 링크만 저장되고 이미지 자체는 저장이 안되는건가?-->
-                                        <!---->
-                                        <img src="{{ secure_asset('storage/image/' . $news->image_path) }}" alt="Image {{ $news->id }}">
+                                        <img src="{{ secure_asset('storage/image/' . $one_post->image_path) }}" alt="Image {{ $one_post->id }}">
                                     </td>
                                     <td>
                                         <div>
-                                            <a href="{{ route('admin.news.edit', ['id' => $news->id]) }}">Edit</a>
+                                            <a href="{{ route('admin.news.edit', ['id' => $one_post->id]) }}">Edit</a>
                                         </div>
                                         <div>
-                                            <a href="{{ route('admin.news.delete', ['id' => $news->id]) }}">Delete</a>
+                                            <a href="{{ route('admin.news.delete', ['id' => $one_post->id]) }}">Delete</a>
                                         </div>
                                     </td>
                                 </tr>
