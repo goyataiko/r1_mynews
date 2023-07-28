@@ -41,6 +41,19 @@
                         </div>
                     </div>
                 </form>
+                <div class="row mt-5">
+                    <div class="col-md-4 mx-auto">
+                        <h2>編集履歴</h2>
+                        <ul class="list-group">
+                            <!--histories는 모델에서 옴-->
+                            @if ($profile_form -> histories != NULL)
+                                @foreach ($profile_form -> histories as $history)
+                                    <li class="list-group-item">Title: {{ $history->profile_name }}<br>Edited_at: {{ $history->edited_at }}</li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

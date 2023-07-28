@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 use App\Models\Profile;
 
+use Carbon\Carbon;
+use App\Models\NewsHistory;
+
 class ProfileController extends Controller
 {
     //==========index
@@ -66,6 +69,12 @@ class ProfileController extends Controller
         unset($inserted_data['_token']);
         
         $original_profile_table -> fill($inserted_data) -> save();
+        
+        $history_table = new ProfileHistory();
+        $history_table->profile_id = $original_profile_table->id;
+        $history_table->profile_name = $original_profile_table->name;
+        $history_table->edited_at = Carbon::now('Asia/Tokyo');
+        $history_table->save();
         
         return redirect('admin/profile/');
     }

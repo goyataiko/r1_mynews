@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 use App\Models\News;
 
+//이력표시
+use App\Models\NewsHistory;
+use Carbon\Carbon;
+
 class NewsController extends Controller
 {
    //==================  Index 기능 ==================
@@ -108,6 +112,13 @@ class NewsController extends Controller
         // $original_news_table->fill($inserted_data);
         // $original_news_table->save();
 
+        //이력표시
+        $history_table = new NewsHistory();
+        $history_table -> news_id = $original_news_table -> id;
+        $history_table -> news_title = $original_news_table -> title;
+        $history_table -> edited_at = Carbon::now('Asia/Tokyo');
+        $history_table -> save();
+        
         return redirect('admin/news');
     }
     
