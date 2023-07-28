@@ -18,6 +18,6 @@ class profile extends Model
     );
     
     public function histories(){
-        // return $this->hasMany('App\Models\NewsHistory');
+        return $this->hasMany('App\Models\ProfileHistory');
     }
 }

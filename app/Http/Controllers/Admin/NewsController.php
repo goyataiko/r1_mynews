@@ -106,18 +106,18 @@ class NewsController extends Controller
         unset($inserted_data['remove']);
         unset($inserted_data['image']);
         
-        //덮어쓰기
-        $original_news_table->fill($inserted_data)-> save();
-        //아래 2줄의 축약형
-        // $original_news_table->fill($inserted_data);
-        // $original_news_table->save();
-
         //이력표시
         $history_table = new NewsHistory();
         $history_table -> news_id = $original_news_table -> id;
         $history_table -> news_title = $original_news_table -> title;
         $history_table -> edited_at = Carbon::now('Asia/Tokyo');
         $history_table -> save();
+        
+        //덮어쓰기
+        $original_news_table->fill($inserted_data)-> save();
+        //아래 2줄의 축약형
+        // $original_news_table->fill($inserted_data);
+        // $original_news_table->save();        
         
         return redirect('admin/news');
     }

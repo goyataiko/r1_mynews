@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\NewsController as PublicNewsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/', [PublicNewsController::class, 'index']) -> name('news.index');
 
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\ProfileController;
