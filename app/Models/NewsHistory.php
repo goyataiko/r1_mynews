@@ -15,9 +15,6 @@ class NewsHistory extends Model
         'news_id' => 'required',
         'news_title' => 'required',
         'edited_at' => 'required',
-        
-        'profile_id' => 'required',
-        'profile_name' => 'required',
     );
     
 }

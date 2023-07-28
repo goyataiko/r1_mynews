@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Profile;
 
 use Carbon\Carbon;
-use App\Models\NewsHistory;
+use App\Models\ProfileHistory;
 
 class ProfileController extends Controller
 {
