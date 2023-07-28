@@ -16,4 +16,8 @@ class profile extends Model
         'age' => 'required|numeric',
         'introduction' => 'required',
     );
+    
+    public function histories(){
+        // return $this->hasMany('App\Models\NewsHistory');
+    }
 }

@@ -54,7 +54,7 @@
                             <!--histories는 news모델에서 옴-->
                             @if ($news_form->histories != NULL)
                                 @foreach ($news_form->histories as $history)
-                                    <li class="list-group-item">{{ $history->edited_at }}</li>
+                                    <li class="list-group-item">Title: {{ $history->news_title }}<br>Edited_at: {{ $history->edited_at }}</li>
                                 @endforeach
                             @endif
                         </ul>

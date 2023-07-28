@@ -16,9 +16,18 @@ return new class extends Migration
         Schema::create('news_histories', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('news_id');
+            $table->string('news_title');
             $table->string('edited_at');
             $table->timestamps();
         });
+        
+        // Schema::create('profile_histories', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->bigInteger('profile_id');
+        //     $table->string('profile_name');
+        //     $table->string('edited_at_profile');
+        //     $table->timestamps();
+        // });
     }
 
     /**

@@ -115,7 +115,8 @@ class NewsController extends Controller
         //이력표시
         $history_table = new NewsHistory();
         $history_table -> news_id = $original_news_table -> id;
-        $history_table -> edited_at = Carbon::now();
+        $history_table -> news_title = $original_news_table -> title;
+        $history_table -> edited_at = Carbon::now('Asia/Tokyo');
         $history_table -> save();
         
         return redirect('admin/news');
